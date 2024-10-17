@@ -1,15 +1,14 @@
 import fabric
 import get_credentials
 import time
+import uuid
 
 cred = get_credentials.getServerCredentials()
 executableFName = "simple-service"
 serviceUserName = "simple-service-user"
 serviceDirectoryName = "simple-service"
-tempDirName = "833ca4b-temp"
-
-# [x]: add commands to add user to system
-
+tempDirName = str(uuid.uuid4())[-12:]+"-temp"
+# print("tempDirName:", tempDirName)
 
 conf = fabric.Config(overrides={'sudo': {'password': cred.password}})
 conn = fabric.Connection(host=f"{cred.user}@{cred.host}",
@@ -50,22 +49,21 @@ conn.sudo(f"chown {serviceUserName} /opt/{serviceDirectoryName}/{executableFName
 # TODO: change cp to move file here and for .service file
 
 
-
-
-
 conn.sudo(f"cp {tempDirName}/simple-service.service /etc/systemd/system/simple-service.service")
 conn.sudo("systemctl daemon-reload")
 conn.sudo("systemctl enable simple-service")
 conn.sudo("systemctl start  simple-service")
 
-# [x]: delete temp directory where files are transferred
 
 conn.run(f"rm -r {tempDirName}")
 
 print("\n\n Wating for 10 seconds for service to start\n")
 time.sleep(10)  
-conn.run("systemctl status  simple-service")
+res = conn.run("systemctl status  simple-service")
 
-print("Deployment of simple-service finished successfully.")
+if "Active: active (running)" in res.stdout:
+    print("Deployment of simple-service finished successfully.")
+else:
+    print("Something wrong with deployment. Service does not seem to be active(running)")
 
 
