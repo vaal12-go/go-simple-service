@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=/opt/simple-service/simple-service
-User=vaal12
+User=simple-service-user
 
 [Install]
 WantedBy=multi-user.target
