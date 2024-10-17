@@ -8,7 +8,8 @@ executableFName = "simple-service"
 serviceUserName = "simple-service-user"
 serviceDirectoryName = "simple-service"
 tempDirName = str(uuid.uuid4())[-12:]+"-temp"
-# print("tempDirName:", tempDirName)
+
+print("Simple-service deployment script. v1.0_17Oct2024")
 
 conf = fabric.Config(overrides={'sudo': {'password': cred.password}})
 conn = fabric.Connection(host=f"{cred.user}@{cred.host}",
@@ -16,7 +17,7 @@ conn = fabric.Connection(host=f"{cred.user}@{cred.host}",
                          config=conf)
 
 res = conn.run(f"id -u {serviceUserName}", warn=True)
-# print("Res.stdout:", res.stderr)
+
 if "no such user" in res.stderr:
     conn.sudo(f"useradd --shell /bin/false --system {serviceUserName}")
     conn.sudo(f"usermod -L {serviceUserName}")

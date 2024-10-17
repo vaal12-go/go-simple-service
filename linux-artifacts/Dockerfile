@@ -1,7 +1,7 @@
 FROM golang:1.22-alpine3.19
 # Build image: docker build -t golang-simple-service-image .
 
-LABEL version="1.0_16Oct2024"
+LABEL version="1.0_17Oct2024"
 LABEL description="This is a service image which is used \
     for compilation of linux executable for simple-service."
 

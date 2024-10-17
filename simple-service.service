@@ -1,5 +1,5 @@
 [Unit]
-Description=This is a simple example of linux service in golang
+Description=This is a simple example of linux service in golang. Version 1.0 17Oct2024
 After=network.target
 
 [Service]
