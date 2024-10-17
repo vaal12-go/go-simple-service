@@ -1,0 +1,11 @@
+[Unit]
+Description=This is a simple example of linux service in golang. Version 1.0 17Oct2024
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/simple-service/simple-service
+User=simple-service-user
+
+[Install]
+WantedBy=multi-user.target

@@ -8,8 +8,12 @@ import (
 	"time"
 )
 
+const (
+	VERSION_STR = "v1.0_17Oct2024"
+)
+
 func main() {
-	fmt.Println("Simple service starting.")
+	fmt.Printf("Simple service starting. Version:%s", VERSION_STR)
 
 	//https://stackoverflow.com/questions/11268943/is-it-possible-to-capture-a-ctrlc-signal-sigint-and-run-a-cleanup-function-i
 	signalChan := make(chan os.Signal, 1)
@@ -36,3 +40,5 @@ signalWaitingLoop:
 	} //signalWaitingLoop: for {
 	fmt.Println("Simple service finished.")
 }
+
+//c46c48ddaccc53835237b551df240c1dc51ca78911fdec845481c04bb2bb438b71ed15431131850dd2654a136047dbe3129c728d4148f971d3bc0d7568124a86
